@@ -19,6 +19,8 @@ import {
   TrendingUp,
   Star,
 } from "lucide-react";
+import MockupGallery from "@/components/landing/MockupGallery";
+import WhyNotCourse from "@/components/landing/WhyNotCourse";
 
 const steps = [
   { icon: Lightbulb, title: "ขายอะไรดี?", desc: "ค้นหาไอเดีย Digital Product จากสิ่งที่คุณรู้อยู่แล้ว" },
@@ -109,6 +111,21 @@ const faqs = [
     q: "ถ้าซื้อแล้วไม่ชอบ คืนเงินได้ไหม?",
     a: "ได้! เรามีนโยบายคืนเงินภายใน 7 วัน ถ้าคุณรู้สึกว่าไม่เหมาะกับคุณจริงๆ",
   },
+  {
+    q: "ฟรี tier ใช้ได้จริงไหม หรือแค่ล่อให้สมัคร?",
+    a: "ใช้ได้จริง! Step 1 (ค้นหาไอเดีย) เปิดให้ใช้เต็มที่ ทั้ง 7 คำถาม + Scoring Matrix ไม่มีหมดอายุ ไม่มีข้อจำกัด คุณจะรู้เลยว่าควรขายอะไร — ก่อนจ่ายแม้แต่บาทเดียว",
+  },
+];
+
+const ideaPills = [
+  "🎨 Designer → Template Pack",
+  "📊 นักบัญชี → Excel สูตร",
+  "🍳 แม่บ้าน → Ebook สูตรอาหาร",
+  "💼 HR → Guide สัมภาษณ์",
+  "📱 คนยิง Ads → Playbook",
+  "📸 ช่างภาพ → Preset Pack",
+  "👩‍🏫 ครูสอนพิเศษ → Mini Course",
+  "💻 คนทำเว็บ → Website Template",
 ];
 
 export default function Index() {
@@ -128,6 +145,7 @@ export default function Index() {
           </span>
           <div className="hidden md:flex gap-6 text-sm text-muted-foreground">
             <button onClick={() => scrollToSection("steps")} className="hover:text-foreground transition-colors">วิธีทำงาน</button>
+            <button onClick={() => scrollToSection("mockups")} className="hover:text-foreground transition-colors">ตัวอย่าง</button>
             <button onClick={() => scrollToSection("pricing")} className="hover:text-foreground transition-colors">ราคา</button>
             <button onClick={() => scrollToSection("faq")} className="hover:text-foreground transition-colors">FAQ</button>
           </div>
@@ -172,11 +190,14 @@ export default function Index() {
               variant="outline"
               size="lg"
               className="py-6"
-              onClick={() => scrollToSection("steps")}
+              onClick={() => scrollToSection("mockups")}
             >
-              ดูวิธีทำงาน
+              ดูตัวอย่างก่อน
             </Button>
           </div>
+          <p className="text-sm text-muted-foreground mt-4">
+            ดูตัวอย่างผลลัพธ์ได้เลย — ไม่ต้องสมัคร ไม่ต้องจ่าย
+          </p>
         </div>
       </section>
 
@@ -285,11 +306,31 @@ export default function Index() {
               );
             })}
           </div>
+
+          {/* Idea Pills */}
+          <div className="mt-10">
+            <p className="text-center font-semibold text-foreground mb-4">
+              ไม่ว่าคุณจะเป็นใคร ก็สร้าง Digital Product ได้
+            </p>
+            <div className="flex gap-2 overflow-x-auto pb-2 md:flex-wrap md:justify-center md:overflow-x-visible scrollbar-hide">
+              {ideaPills.map((pill, i) => (
+                <span
+                  key={i}
+                  className="flex-shrink-0 bg-accent/10 text-foreground text-xs font-medium px-3 py-1.5 rounded-full whitespace-nowrap border border-accent/20"
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* Mockup Gallery */}
+      <MockupGallery />
+
       {/* Personas */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 bg-secondary/50">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
             เหมาะกับใคร?
@@ -324,6 +365,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Why Not Course */}
+      <WhyNotCourse />
 
       {/* Pricing */}
       <section id="pricing" className="py-16 md:py-20 bg-secondary/50">
