@@ -23,8 +23,8 @@ import MockupGallery from "@/components/landing/MockupGallery";
 import WhyNotCourse from "@/components/landing/WhyNotCourse";
 
 const steps = [
-  { icon: Lightbulb, title: "ขายอะไรดี?", desc: "ค้นหาไอเดีย Digital Product จากสิ่งที่คุณรู้อยู่แล้ว" },
-  { icon: Package, title: "ทำยังไง?", desc: "สร้าง Product จริงด้วย Template สำเร็จรูป" },
+  { icon: Lightbulb, title: "ขายอะไรดี?", desc: "บอก AI ว่าคุณเก่งอะไร — ได้ไอเดีย Ebook ใน 30 วินาที" },
+  { icon: Package, title: "ทำยังไง?", desc: "AI สร้าง Ebook ให้ครบเล่ม — แค่กดปุ่มเดียว" },
   { icon: Users, title: "ลูกค้าอยู่ไหน?", desc: "รู้ว่าลูกค้าอยู่ที่ไหน พูดภาษาอะไร" },
   { icon: CreditCard, title: "หน้าขาย + รับเงิน", desc: "หน้าขายที่ดูดี + ระบบรับเงินที่ใช้ได้จริง" },
   { icon: CalendarDays, title: "Content Plan 30 วัน", desc: "แผนโปรโมทพร้อมโพสต์ 30 วัน" },
