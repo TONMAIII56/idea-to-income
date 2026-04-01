@@ -174,8 +174,7 @@ export default function Index() {
             <span className="text-accent">ระบบนี้สร้างให้คุณ</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-            กรอกแล้วได้ — ไม่ใช่คอร์ส แต่คือเครื่องมือที่ช่วยคุณสร้าง Digital Product
-            จากสิ่งที่คุณรู้อยู่แล้ว ใน 5 ขั้นตอน
+            เล่าว่าคุณเก่งอะไร — AI สร้าง Ebook พร้อมขายให้ใน 5 นาที
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
