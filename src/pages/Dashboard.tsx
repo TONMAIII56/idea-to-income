@@ -129,6 +129,49 @@ export default function Dashboard() {
           })}
         </div>
 
+        {/* Ebook section */}
+        {localStorage.getItem("step2-completed") === "true" && (
+          <>
+            <h2 className="text-lg font-bold mb-4">📕 Ebook ของคุณ</h2>
+            <Card className="mb-8 border-accent/30">
+              <CardContent className="pt-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-accent" />
+                  <span className="font-semibold">
+                    {(() => {
+                      try { return JSON.parse(localStorage.getItem("ebook-cover") || "{}").title_th || "Ebook"; } catch { return "Ebook"; }
+                    })()}
+                  </span>
+                  <span className="text-[10px] bg-accent/15 text-accent-foreground px-2 py-0.5 rounded-full">เสร็จแล้ว ✓</span>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" onClick={() => navigate("/step/2")}>ดู/แก้ไข Ebook</Button>
+                  <Button size="sm" variant="outline" onClick={async () => {
+                    try {
+                      const cover = JSON.parse(localStorage.getItem("ebook-cover") || "{}");
+                      const intro = localStorage.getItem("ebook-intro") || "";
+                      const tocData = JSON.parse(localStorage.getItem("ebook-toc") || "[]");
+                      const chaptersData = JSON.parse(localStorage.getItem("ebook-chapters") || "[]");
+                      const closingData = JSON.parse(localStorage.getItem("ebook-closing") || "{}");
+                      const full = [
+                        `${cover.title_en}\n${cover.title_th}\n${cover.subtitle}\nby ${cover.author}`,
+                        `\n\n---\n\nคำนำ\n\n${intro}`,
+                        `\n\n---\n\nสารบัญ\n\n${tocData.map((c: any, i: number) => `${i+1}. ${c.title}`).join("\n")}`,
+                        ...chaptersData.map((c: any, i: number) => `\n\n---\n\nบทที่ ${i+1}: ${c.title}\n\n${c.content}`),
+                        `\n\n---\n\nบทส่งท้าย\n\n${closingData.content}\n\n"${closingData.quote}"`,
+                      ].join("");
+                      await navigator.clipboard.writeText(full);
+                      window.open("https://docs.google.com/document/create", "_blank");
+                    } catch {}
+                  }}>
+                    <ExternalLink className="h-3 w-3 mr-1" />Export Google Docs
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        )}
+
         {/* Resources */}
         <h2 className="text-lg font-bold mb-4">📄 ลิงก์ Template</h2>
         <Card>
