@@ -169,9 +169,9 @@ export default function Index() {
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             คนอื่นสอนยิง Ads...
             <br />
-            <span className="text-primary">แต่ถ้ายังไม่รู้จะขายอะไรดีวะ</span>
+            <span className="text-primary">แต่ถ้ายังไม่มีของขาย</span>
             <br />
-            <span className="text-accent">ระบบนี้คือคำตอบ</span>
+            <span className="text-accent">ระบบนี้สร้างให้คุณ</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             กรอกแล้วได้ — ไม่ใช่คอร์ส แต่คือเครื่องมือที่ช่วยคุณสร้าง Digital Product
