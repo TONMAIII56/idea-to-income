@@ -16,8 +16,8 @@ import {
 } from "lucide-react";
 
 const steps = [
-  { key: "1", icon: Lightbulb, title: "ขายอะไรดี?", desc: "ค้นหาไอเดีย Digital Product", path: "/step/1", storageKey: "step1-completed", active: true },
-  { key: "2", icon: Package, title: "ทำยังไง?", desc: "สร้าง Product ด้วย Template", path: "/step/2", storageKey: "step2-completed", active: true },
+  { key: "1", icon: Lightbulb, title: "ขายอะไรดี?", desc: "ค้นหาไอเดีย Ebook ด้วย AI", path: "/step/1", storageKey: "step1-completed", active: true },
+  { key: "2", icon: Package, title: "ทำยังไง?", desc: "AI สร้าง Ebook ให้คุณครบเล่ม", path: "/step/2", storageKey: "step2-completed", active: true },
   { key: "3", icon: Users, title: "ลูกค้าอยู่ไหน?", desc: "ค้นหากลุ่มเป้าหมาย", path: "", storageKey: "", active: false },
   { key: "4", icon: CreditCard, title: "หน้าขาย + รับเงิน", desc: "สร้างหน้าขายและระบบรับเงิน", path: "", storageKey: "", active: false },
   { key: "5", icon: CalendarDays, title: "Content Plan 30 วัน", desc: "แผนโปรโมท 30 วัน", path: "", storageKey: "", active: false },
