@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export function useAI() {
@@ -7,36 +8,31 @@ export function useAI() {
   const generate = async (prompt: string, maxTokens = 4096): Promise<string | null> => {
     setLoading(true);
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: maxTokens,
-          messages: [
-            {
-              role: "user",
-              content: prompt,
-            },
-          ],
-        }),
+      console.log("Calling AI with prompt length:", prompt.length);
+
+      const { data, error } = await supabase.functions.invoke("generate-ai", {
+        body: { prompt, max_tokens: maxTokens },
       });
 
-      if (!response.ok) {
-        const errText = await response.text();
-        console.error("Anthropic API error:", response.status, errText);
-        toast.error("เกิดข้อผิดพลาด กรุณาลองใหม่");
+      console.log("AI Response data:", data);
+      console.log("AI Response error:", error);
+
+      if (error) {
+        console.error("Supabase function error:", error);
+        toast.error("เกิดข้อผิดพลาด: " + (error.message || "Unknown error"));
         return null;
       }
 
-      const data = await response.json();
-      const text = data.content?.[0]?.text || "";
-      return text;
+      if (data?.error) {
+        console.error("AI gateway error:", data.error);
+        toast.error("AI Error: " + data.error);
+        return null;
+      }
+
+      return data?.text || null;
     } catch (err) {
-      console.error("AI Error:", err);
-      toast.error("ไม่สามารถเชื่อมต่อได้ กรุณาตรวจสอบอินเทอร์เน็ต");
+      console.error("Network error:", err);
+      toast.error("ไม่สามารถเชื่อมต่อ AI ได้ กรุณาลองใหม่");
       return null;
     } finally {
       setLoading(false);
