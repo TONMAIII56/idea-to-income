@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 export function useAI() {
@@ -8,22 +7,33 @@ export function useAI() {
   const generate = async (prompt: string, maxTokens = 4096): Promise<string | null> => {
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("generate-ai", {
-        body: { prompt, max_tokens: maxTokens },
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: maxTokens,
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+        }),
       });
 
-      if (error) {
-        console.error("AI Error:", error);
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("Anthropic API error:", response.status, errText);
         toast.error("เกิดข้อผิดพลาด กรุณาลองใหม่");
         return null;
       }
 
-      if (data?.error) {
-        toast.error(data.error);
-        return null;
-      }
-
-      return data?.text || null;
+      const data = await response.json();
+      const text = data.content?.[0]?.text || "";
+      return text;
     } catch (err) {
       console.error("AI Error:", err);
       toast.error("ไม่สามารถเชื่อมต่อได้ กรุณาตรวจสอบอินเทอร์เน็ต");
